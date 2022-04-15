@@ -1,0 +1,27 @@
+body {margin: 0; padding: 0; overflow:hidden; background-color:#2482d1; text-align: center;}
+
+
+
+
+#container{width:100%; height: 100%; position: absolute; margin: auto; }
+
+
+
+
+
+
+
+
+
+#rocket {z-index:2; position: absolute; bottom:-10px; display: block;}
+
+#rocketplace{width: 125px; height: 100%; margin: auto; bottom:-10px;}
+#smokefrontplace{z-index: -1; position: absolute; bottom: 0; height: 20px; width: 60%; text-align: center; margin-left: 20%; margin-right: 20%; bottom: -10px;}
+#smokebackplace{z-index: -3; position: absolute; bottom: 0; height: 20px; width: 30%; text-align: center; margin-left: 45%; margin-right: 45%; bottom: -10px;}
+#windplace{z-index: -2; position: absolute; bottom: 0; height: 20px; width: 60%; text-align: center; margin-left: 20%; margin-right: 20%; bottom: -10px}
+
+
+
+.smokefront {background-color: #ffffff; width: 50px; height: 50px;	-moz-border-radius: 500px;	-webkit-border-radius: 500px;float:left; margin-left:4%;;margin-right: 4%; bottom: -15px; }
+.smokeback {background-color: #ffffff; width: 50px; height: 50px;	-moz-border-radius: 500px;	-webkit-border-radius: 500px;float:left; margin-left:9%;;margin-right: 9%; bottom: -15px; }
+.wind {width: 4px; height: 2px; 	-moz-border-radius: 500px;	-webkit-border-radius: 500px; background-color:#1168b1;  margin-left:11%;;margin-right:11%; float: left;}

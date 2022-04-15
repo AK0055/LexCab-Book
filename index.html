@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>LexCab booker</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@700&display=swap" rel="stylesheet">
+  <link rel = "stylesheet" href = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css"/>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style>
+  h1{font-family: 'Quicksand', sans-serif;}
+  h2{font-family: 'Quicksand', sans-serif;}
+  h3{font-family: 'Quicksand', sans-serif;}
+  body {margin: 0; padding: 0; overflow:hidden; background-color:#2482d1; text-align: center;}
+#container{width:100%; height: 100%; position: absolute; margin: auto; }
+
+#rocket {z-index:2; position: absolute; bottom:-10px; display: block;}
+
+#rocketplace{width: 125px; height: 100%; margin: auto; bottom:-10px;}
+#smokefrontplace{z-index: -1; position: absolute; bottom: 0; height: 20px; width: 60%; text-align: center; margin-left: 20%; margin-right: 20%; bottom: -10px;}
+#smokebackplace{z-index: -3; position: absolute; bottom: 0; height: 20px; width: 30%; text-align: center; margin-left: 45%; margin-right: 45%; bottom: -10px;}
+#windplace{z-index: -2; position: absolute; bottom: 0; height: 20px; width: 60%; text-align: center; margin-left: 20%; margin-right: 20%; bottom: -10px}
+
+
+
+.smokefront {background-color: #ffffff; width: 50px; height: 50px;	-moz-border-radius: 500px;	-webkit-border-radius: 500px;float:left; margin-left:4%;;margin-right: 4%; bottom: -15px; }
+.smokeback {background-color: #ffffff; width: 50px; height: 50px;	-moz-border-radius: 500px;	-webkit-border-radius: 500px;float:left; margin-left:9%;;margin-right: 9%; bottom: -15px; }
+.wind {width: 4px; height: 2px; 	-moz-border-radius: 500px;	-webkit-border-radius: 500px; background-color:#1168b1;  margin-left:11%;;margin-right:11%; float: left;}
+</style>
+</head>
+
+
+  <!-- partial:index.partial.html -->
+
+  <body>
+    
+    <div id="container">
+      <h1 ><strong>LexCab booker</strong></h1>
+      <h3>A smart solution for all your rides</h2>
+      <h3>Book your cab at a rocket speed by choosing your destination and clicking on the <strong>Cab</strong> button</h2>
+      <h3 class="w3-animate-bottom" id="dist"></h3><h3 id="pay"></h3>
+      <div  id = "map" style = "width: 480px; height: 480px; left: -10px; top: 120px"></div>
+      <div id="rocketplace">
+        <svg id="rocket" opacity="0" height="390px" ; xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.33 392.88">
+          <defs>
+            <style>
+              .cls-1,
+              .cls-23 {
+                fill: #f8c407;
+              }
+              .cls-14,
+              .cls-15,
+              .cls-2,
+              .cls-20,
+              .cls-25,
+              .cls-3,
+              .cls-7 {
+                fill: none;
+              }
+
+              .cls-2 {
+                stroke: #fcd24f;
+              }
+
+              .cls-14,
+              .cls-15,
+              .cls-2,
+              .cls-25,
+              .cls-3 {
+                stroke-linecap: round;
+              }
+
+              .cls-14,
+              .cls-2,
+              .cls-3 {
+                stroke-miterlimit: 10;
+              }
+
+              .cls-15,
+              .cls-17,
+              .cls-2,
+              .cls-23,
+              .cls-24,
+              .cls-25,
+              .cls-3,
+              .cls-5,
+              .cls-7,
+              .cls-8,
+              .cls-9 {
+                stroke-width: 2px;
+              }
+
+              .cls-3 {
+                stroke: #feec64;
+              }
+
+              .cls-4 {
+                fill: #f9f9f9;
+              }
+
+              .cls-5 {
+                fill: #c14d54;
+              }
+
+              .cls-17,
+              .cls-20,
+              .cls-23,
+              .cls-24,
+              .cls-25,
+              .cls-5,
+              .cls-7,
+              .cls-8,
+              .cls-9 {
+                stroke: #303a68;
+              }
+
+              .cls-15,
+              .cls-17,
+              .cls-20,
+              .cls-23,
+              .cls-24,
+              .cls-25,
+              .cls-5,
+              .cls-7,
+              .cls-8,
+              .cls-9 {
+                stroke-linejoin: round;
+              }
+
+              .cls-6 {
+                fill: #d55763;
+              }
+
+              .cls-21,
+              .cls-8 {
+                fill: #e4e2f1;
+              }
+
+              .cls-9 {
+                fill: #ea0707;
+              }
+
+              .cls-10 {
+                fill: #303a68;
+              }
+
+              .cls-11 {
+                fill: #157cd8;
+              }
+
+              .cls-12 {
+                opacity: 0.23;
+              }
+
+              .cls-13 {
+                opacity: 0.3;
+              }
+
+              .cls-14,
+              .cls-15 {
+                stroke: #fff;
+              }
+
+              .cls-14 {
+                stroke-width: 3px;
+              }
+
+              .cls-15 {
+                opacity: 0.51;
+              }
+
+              .cls-16 {
+                fill: #fff;
+              }
+
+              .cls-17 {
+                fill: #f4f3f8;
+              }
+
+              .cls-18 {
+                opacity: 0.21;
+              }
+
+              .cls-19 {
+                fill: #465691;
+              }
+
+              .cls-22 {
+                opacity: 0.7;
+              }
+
+              .cls-24 {
+                fill: #dedde8;
+              }
+            </style>
+          </defs>
+          <title>Rocket</title>
+          <g id="Layer_2" data-name="Layer 2">
+            <g id="Layer_1-2" data-name="Layer 1">
+              <polyline class="cls-1" points="120.4 315.68 120.4 392.88 99.82 392.88 99.82 315.68" />
+              <rect class="cls-1" x="6.82" y="315.68" width="20.58" height="75.54" />
+              <line class="cls-2" x1="109.69" y1="324.22" x2="109.69" y2="332.3" />
+              <line class="cls-3" x1="109.69" y1="351.84" x2="109.69" y2="363.72" />
+              <path class="cls-2" d="M113.11,331.84" />
+              <path class="cls-2" d="M113.11,339.93" />
+              <path class="cls-2" d="M113.11,324.22" />
+              <path class="cls-2" d="M113.11,327.93" />
+              <line class="cls-1" x1="120.4" y1="315.68" x2="120.4" y2="344.88" />
+              <line class="cls-3" x1="109.69" y1="324.22" x2="109.69" y2="332.3" />
+              <line class="cls-3" x1="109.69" y1="341.84" x2="109.69" y2="345.55" />
+              <path class="cls-2" d="M113.11,331.84" />
+              <path class="cls-2" d="M113.11,327.93" />
+              <rect class="cls-4" x="42.57" y="313.51" width="42.75" height="75.54" />
+              <path class="cls-5"
+                d="M86.15,275.55h-45a10,10,0,0,1-10-10V86A130.35,130.35,0,0,1,53.5,12.76l6.79-10a4.07,4.07,0,0,1,6.73,0l6.79,10A130.35,130.35,0,0,1,96.15,86V265.55A10,10,0,0,1,86.15,275.55Z" />
+              <path class="cls-6"
+                d="M58.86,139.38a848.3,848.3,0,0,1,.25-101.12Q60.24,20,62.07,2.8a4,4,0,0,0-1.2,1.15l-6.79,10A130.34,130.34,0,0,0,31.73,87.14v52.24Z" />
+              <line class="cls-7" x1="43.27" y1="30.72" x2="84.4" y2="30.72" />
+              <line class="cls-7" x1="32.77" y1="69.22" x2="95.27" y2="69.22" />
+              <path class="cls-7" d="M95.4,97.72" />
+              <path class="cls-7" d="M31.9,97.72" />
+              <path class="cls-8"
+                d="M124.1,306H96.2V128a51.93,51.93,0,0,1,9.6-30.08l2.91-4.1a1.77,1.77,0,0,1,2.89,0l2.91,4.1A51.93,51.93,0,0,1,124.1,128Z" />
+              <path class="cls-9"
+                d="M103.82,316.06H116.9a0,0,0,0,1,0,0v0a4,4,0,0,1-4,4h-5.07a4,4,0,0,1-4-4v0A0,0,0,0,1,103.82,316.06Z" />
+              <path class="cls-10"
+                d="M120.38,316.16H100.24a1.46,1.46,0,0,1-1-.42L96,312.43h28.47l-3,3.28A1.45,1.45,0,0,1,120.38,316.16Z" />
+              <path class="cls-8"
+                d="M98.2,300.22h23.7a2.14,2.14,0,0,1,2.06,1.57l2.32,8.44a1.57,1.57,0,0,1-1.52,2H95.57A1.57,1.57,0,0,1,94,310.27l2.08-8.43A2.14,2.14,0,0,1,98.2,300.22Z" />
+              <path class="cls-11" d="M123.09,231.12c-.31,0-.62,0-.94,0a14,14,0,1,0,0,28c.32,0,.63,0,.94,0Z" />
+              <path class="cls-8"
+                d="M31.1,306H3.2V128a51.93,51.93,0,0,1,9.6-30.08l2.91-4.1a1.77,1.77,0,0,1,2.89,0l2.91,4.1A51.93,51.93,0,0,1,31.1,128Z" />
+              <path class="cls-9"
+                d="M10.82,316.06H23.9a0,0,0,0,1,0,0v0a4,4,0,0,1-4,4H14.82a4,4,0,0,1-4-4v0A0,0,0,0,1,10.82,316.06Z" />
+              <path class="cls-10"
+                d="M27.38,316.16H7.24a1.46,1.46,0,0,1-1-.42L3,312.43H31.43l-3,3.28A1.45,1.45,0,0,1,27.38,316.16Z" />
+              <path class="cls-8"
+                d="M5.2,300.22h23.7A2.14,2.14,0,0,1,31,301.79l2.32,8.44a1.57,1.57,0,0,1-1.52,2H2.57A1.57,1.57,0,0,1,1,310.27l2.08-8.43A2.14,2.14,0,0,1,5.2,300.22Z" />
+              <path class="cls-10"
+                d="M29,113.38a51.92,51.92,0,0,0-7.49-15.49l-2.91-4.1a1.77,1.77,0,0,0-2.89,0l-2.91,4.1a51.92,51.92,0,0,0-7.5,15.49Z" />
+              <path class="cls-10"
+                d="M121.92,113.22a51.92,51.92,0,0,0-7.49-15.49l-2.91-4.1a1.77,1.77,0,0,0-2.89,0l-2.91,4.1a51.92,51.92,0,0,0-7.5,15.49Z" />
+              <path class="cls-10"
+                d="M16.23,282.46v2.7a.77.77,0,0,1-.77.77H9.08a.77.77,0,0,1-.77-.77v-2.31a4.45,4.45,0,0,1,.19-1.39,1.91,1.91,0,0,1,.52-.87,2,2,0,0,1,1.38-.54,1.63,1.63,0,0,1,1.38.59,2.58,2.58,0,0,1,.2.29l.13.28a2.08,2.08,0,0,1,.66-1.17,1.85,1.85,0,0,1,1.25-.44,2.13,2.13,0,0,1,1.46.57A3,3,0,0,1,16.23,282.46Zm-4.63,2.13v-1.7q0-1.45-1-1.45a.93.93,0,0,0-.82.35,1.9,1.9,0,0,0-.25,1.09v1.71Zm3.4,0v-2.1a2.23,2.23,0,0,0-.23-1.13.94.94,0,0,0-.88-.39q-1.05,0-1.05,1.69v1.93Z" />
+              <path class="cls-10"
+                d="M15.42,273.07a3.3,3.3,0,0,1,0,4.53,3.13,3.13,0,0,1-4.41,0,3.3,3.3,0,0,1,0-4.53,3.13,3.13,0,0,1,4.41,0Zm-.78,3.63a2,2,0,0,0,0-2.73,2,2,0,0,0-1.42-.54,2,2,0,0,0-1.42.54,2,2,0,0,0,0,2.73,2,2,0,0,0,1.42.54A2,2,0,0,0,14.64,276.7Z" />
+              <path class="cls-10"
+                d="M15.42,265.68a3.3,3.3,0,0,1,0,4.53,3.13,3.13,0,0,1-4.41,0,3.3,3.3,0,0,1,0-4.53,3.13,3.13,0,0,1,4.41,0Zm-.78,3.63a2,2,0,0,0,0-2.73,2,2,0,0,0-1.42-.54,2,2,0,0,0-1.42.54,2,2,0,0,0,0,2.73,2,2,0,0,0,1.42.54A2,2,0,0,0,14.64,269.32Z" />
+              <path class="cls-10"
+                d="M16.23,262.66v.09a.59.59,0,0,1-.59.59H8.41a.59.59,0,0,1-.59-.59v-.09a.59.59,0,0,1,.59-.59h4.35l-2.38-2.27a.59.59,0,0,1-.18-.43h0a.59.59,0,0,1,1-.43l1.39,1.33,2.72-1.84a.59.59,0,0,1,.92.49V259a.59.59,0,0,1-.26.49l-2.38,1.61.93.92h1.12A.59.59,0,0,1,16.23,262.66Z" />
+              <path class="cls-10"
+                d="M9,256.68a.79.79,0,1,1,.24-.57A.77.77,0,0,1,9,256.68Zm7.23-.56h0a.63.63,0,0,1-.63.63H10.84a.63.63,0,0,1-.63-.63h0a.63.63,0,0,1,.63-.63h4.76A.63.63,0,0,1,16.23,256.12Z" />
+              <path class="cls-10"
+                d="M13,252.38h2.63a.63.63,0,0,1,.63.63h0a.63.63,0,0,1-.63.63H11a.82.82,0,0,1-.82-.82v-.26a.19.19,0,0,1,.19-.19h.31a.19.19,0,0,0,.13-.34,2.26,2.26,0,0,1-.4-.49,2.83,2.83,0,0,1-.31-1.48,2.15,2.15,0,0,1,.61-1.34,2.43,2.43,0,0,1,1.8-.63h3.06a.63.63,0,0,1,.63.63h0a.63.63,0,0,1-.63.63H12.92q-1.67,0-1.67,1.38a1.66,1.66,0,0,0,.44,1.14A1.62,1.62,0,0,0,13,252.38Z" />
+              <path class="cls-10"
+                d="M10.2,241.39a.63.63,0,0,1,.63-.63h4.62a3.1,3.1,0,0,1,2.4.87,3.16,3.16,0,0,1,.8,2.23,3.88,3.88,0,0,1-.52,2,.57.57,0,0,1-.8.2h0a.57.57,0,0,1-.19-.77,2.7,2.7,0,0,0,.37-1.33A2.08,2.08,0,0,0,17,242.5a1.88,1.88,0,0,0-1.48-.53h-.77a2.16,2.16,0,0,1,.85.81A2.25,2.25,0,0,1,16,244a2.56,2.56,0,0,1-.84,2,3,3,0,0,1-2.08.77,3,3,0,0,1-2.08-.77,2.55,2.55,0,0,1-.84-2,2.33,2.33,0,0,1,1-1.94h-.26a.63.63,0,0,1-.63-.63ZM13,245.46a1.91,1.91,0,0,0,1.28-.46,1.54,1.54,0,0,0,.54-1.23,1.63,1.63,0,0,0-.52-1.26A1.84,1.84,0,0,0,13,242a1.89,1.89,0,0,0-1.31.49,1.62,1.62,0,0,0-.54,1.26,1.51,1.51,0,0,0,.56,1.23A2,2,0,0,0,13,245.46Z" />
+              <path class="cls-10"
+                d="M9.56,236.07h2.18v-2.89a.62.62,0,0,1,.62-.62h0a.62.62,0,0,1,.62.62v2.89h2.59a.67.67,0,0,1,.67.67h0a.67.67,0,0,1-.67.67H9.13a.82.82,0,0,1-.82-.82v-3.83a.62.62,0,0,1,.63-.62h0a.62.62,0,0,1,.62.62Z" />
+              <path class="cls-10"
+                d="M16.23,226.69h0a.58.58,0,0,1-.58.58h-.23a2.48,2.48,0,0,1,.9,2,2.3,2.3,0,0,1-.53,1.56,1.78,1.78,0,0,1-1.42.62,1.5,1.5,0,0,1-1.33-.66,3.15,3.15,0,0,1-.44-1.78v-1.64h-.23q-1.2,0-1.2,1.34a2.86,2.86,0,0,0,.38,1.36.51.51,0,0,1-.15.66h0a.51.51,0,0,1-.73-.15,3.88,3.88,0,0,1-.56-2,2.7,2.7,0,0,1,.54-1.74,2,2,0,0,1,1.69-.67h3.31A.58.58,0,0,1,16.23,226.69Zm-2.24.69h-.51v1.43q0,1.37.86,1.37a.77.77,0,0,0,.67-.34,1.66,1.66,0,0,0,.23-.95,1.72,1.72,0,0,0-.34-1.06A1.09,1.09,0,0,0,14,227.38Z" />
+              <path class="cls-10"
+                d="M16.32,221.67a3,3,0,0,1-.86,2.16,2.93,2.93,0,0,1-2.24.91,2.91,2.91,0,0,1-2.25-.95,3.29,3.29,0,0,1-.87-2.31,3.15,3.15,0,0,1,.52-1.79.61.61,0,0,1,.89-.13h0a.61.61,0,0,1,.13.8,2.13,2.13,0,0,0-.35,1.14,2,2,0,0,0,.53,1.38,1.75,1.75,0,0,0,1.36.58,2,2,0,0,0,2-2,2,2,0,0,0-.43-1.21.56.56,0,0,1,.06-.75h0a.55.55,0,0,1,.81.07A3.36,3.36,0,0,1,16.32,221.67Z" />
+              <path class="cls-10"
+                d="M11.22,216.25h3.06A1,1,0,0,0,15,216a.8.8,0,0,0,.25-.63.87.87,0,0,0-.1-.4.5.5,0,0,1,.18-.66l0,0a.5.5,0,0,1,.67.16,2.06,2.06,0,0,1,.31,1.09,1.9,1.9,0,0,1-.56,1.38,2,2,0,0,1-1.51.57h-3v.26a.5.5,0,0,1-.5.5h0a.5.5,0,0,1-.5-.5v-.26H8.81a.5.5,0,0,1-.5-.5v-.27a.5.5,0,0,1,.5-.5H10.2v-1.09a.5.5,0,0,1,.5-.5h0a.5.5,0,0,1,.5.5Z" />
+              <path class="cls-10"
+                d="M15.42,208.08a3.3,3.3,0,0,1,0,4.53,3.13,3.13,0,0,1-4.41,0,3.3,3.3,0,0,1,0-4.53,3.13,3.13,0,0,1,4.41,0Zm-.78,3.63a2,2,0,0,0,0-2.73,2,2,0,0,0-1.42-.54,2,2,0,0,0-1.42.54,2,2,0,0,0,0,2.73,2,2,0,0,0,1.42.54A2,2,0,0,0,14.64,211.71Z" />
+              <path class="cls-10"
+                d="M11.39,202.88A1.34,1.34,0,0,0,12,204a2.61,2.61,0,0,0,1.64.48h1.95a.63.63,0,0,1,.63.63h0a.63.63,0,0,1-.63.63H10.51a.31.31,0,0,1-.31-.31v-.65a.31.31,0,0,1,.31-.31h0a.31.31,0,0,0,.23-.52,2.68,2.68,0,0,1-.26-.32,2.1,2.1,0,0,1-.33-.74.31.31,0,0,1,.3-.38H11a.37.37,0,0,1,.37.37Z" />
+              <path class="cls-10"
+                d="M18.63,200.48a2.09,2.09,0,0,1-.25,1,.6.6,0,0,1-.82.23h0a.6.6,0,0,1-.26-.76,1,1,0,0,0,.08-.38.87.87,0,0,0-.31-.69,1,1,0,0,0-.67-.27q-.15,0-5.33,2.09a.63.63,0,0,1-.87-.59h0a.63.63,0,0,1,.39-.58l4-1.64-4-1.64a.63.63,0,0,1-.39-.58h0a.63.63,0,0,1,.87-.58l6.29,2.57a2.18,2.18,0,0,1,.93.75A1.84,1.84,0,0,1,18.63,200.48Z" />
+              <line class="cls-7" x1="3.4" y1="129.47" x2="31.15" y2="129.47" />
+              <line class="cls-7" x1="3.4" y1="150.97" x2="31.15" y2="150.97" />
+              <line class="cls-7" x1="2.9" y1="172.97" x2="30.65" y2="172.97" />
+              <g class="cls-12">
+                <path class="cls-10"
+                  d="M99.74,315.9H117l.55-4.74-.78-10.79v-170c-.19-5.52-.64-11.56-1.49-18a187.52,187.52,0,0,0-3.39-18.51,1.77,1.77,0,0,0-2.89,0l-2.91,4.1A51.93,51.93,0,0,0,96.53,128V301.63a2.1,2.1,0,0,0-.07.22l-2.08,8.43a1.57,1.57,0,0,0,1.45,1.94l3.71,3.53A1.3,1.3,0,0,0,99.74,315.9Z" />
+              </g>
+              <g class="cls-13">
+                <path class="cls-10"
+                  d="M32.92,310.27l-2.08-8.43a2.1,2.1,0,0,0-.07-.22V128c0-10.78.75-10.88-4.56-20.31a74.31,74.31,0,0,0-5.56,27.25V300.22c0,4.84.84,12.13.84,12.13l-.84,7.43a4,4,0,0,0,2.49-3.61h3.59a1.46,1.46,0,0,0,1-.42l3.71-3.53A1.57,1.57,0,0,0,32.92,310.27Z" />
+              </g>
+              <line class="cls-7" x1="96.9" y1="129.63" x2="124.65" y2="129.63" />
+              <line class="cls-7" x1="96.9" y1="151.13" x2="124.65" y2="151.13" />
+              <line class="cls-7" x1="96.4" y1="173.13" x2="124.15" y2="173.13" />
+              <line class="cls-14" x1="9.15" y1="124.05" x2="9.15" y2="157.84" />
+              <path class="cls-15" d="M57.76,16.11c-3,5-5.84,9.31-8.49,16.22C48,35.71,46.88,39,46,42.24" />
+              <path class="cls-16" d="M121.3,247a.61.61,0,1,0,0,1.22h1.79V247H121.3Z" />
+              <path class="cls-16" d="M121.75,237.47h1.34V236.2h-1.34a.64.64,0,0,0,0,1.27Z" />
+              <path class="cls-16"
+                d="M123.09,249.92h-9.23l.43-.69a2.31,2.31,0,0,1,2-1h1.2a.61.61,0,1,0,0-1.22h-1.16v-1.62a4.8,4.8,0,0,1,3.15-4.5,4.73,4.73,0,0,1,1.61-.29h2v-1.27h-2a5.91,5.91,0,0,0-2,.38,6,6,0,0,0-4,5.69v1.81a3.26,3.26,0,0,0-1.81,1.37l-1.05,1.64a.66.66,0,0,0,0,.65.63.63,0,0,0,.54.34h10.37Z" />
+              <path class="cls-10"
+                d="M84.16,320.72H43.6c-2.49,0-4.3-3-3.64-5.95l3.38-10.31H83.9l3.92,10.4C88.42,317.84,86.61,320.72,84.16,320.72Z" />
+              <path class="cls-8"
+                d="M38.87,299H89.65a0,0,0,0,1,0,0v0a9.24,9.24,0,0,1-9.24,9.24H48.11A9.24,9.24,0,0,1,38.87,299v0A0,0,0,0,1,38.87,299Z" />
+              <path class="cls-8"
+                d="M29.13,291.47h72.53a5.48,5.48,0,0,1,5.48,5.48v4.9a0,0,0,0,1,0,0H20.88a0,0,0,0,1,0,0v-2.13A8.25,8.25,0,0,1,29.13,291.47Z" />
+              <rect class="cls-17" x="26.33" y="126.22" width="75.36" height="153.83" />
+              <rect class="cls-11" x="26.33" y="264.33" width="75.36" height="26.22" />
+              <path class="cls-10" d="M100.69,265.33v24.22H27.33V265.33h73.36m2-2H25.33v28.22h77.36V263.33Z" />
+              <g class="cls-18">
+                <polygon class="cls-19"
+                  points="25.4 130.09 25.4 134.48 68.4 134.48 68.4 300.97 98.65 300.97 98.65 134.48 102.02 134.48 102.02 130.09 25.4 130.09" />
+              </g>
+              <path class="cls-11"
+                d="M56.83,297.74a4.35,4.35,0,0,1-4.34-4.34V280.78a11,11,0,0,1,11-11h1.33a11,11,0,0,1,11,11v12.61a4.35,4.35,0,0,1-4.34,4.34Z" />
+              <path class="cls-10"
+                d="M64.82,270.78a10,10,0,0,1,10,10v12.61a3.35,3.35,0,0,1-3.34,3.34H56.83a3.35,3.35,0,0,1-3.34-3.34V280.78a10,10,0,0,1,10-10h1.33m0-2H63.48a12,12,0,0,0-12,12v12.61a5.36,5.36,0,0,0,5.34,5.34H71.47a5.36,5.36,0,0,0,5.34-5.34V280.78a12,12,0,0,0-12-12Z" />
+              <line class="cls-7" x1="26.33" y1="129.72" x2="101.69" y2="129.72" />
+              <rect class="cls-11" x="53.96" y="141.56" width="20.46" height="26.56" />
+              <path class="cls-10" d="M73.42,142.56v24.56H55V142.56H73.42m2-2H53v28.56H75.42V140.56Z" />
+              <line class="cls-20" x1="64.11" y1="142.48" x2="64.11" y2="167.02" />
+              <rect class="cls-21" x="49.78" y="165.13" width="28.46" height="4.31" />
+              <path class="cls-10" d="M77.24,166.13v2.31H50.78v-2.31H77.24m2-2H48.78v6.31H79.24v-6.31Z" />
+              <line class="cls-7" x1="48.9" y1="140.51" x2="79.01" y2="140.51" />
+              <rect class="cls-11" x="53.96" y="180.22" width="20.46" height="26.56" />
+              <path class="cls-10" d="M73.42,181.22v24.56H55V181.22H73.42m2-2H53v28.56H75.42V179.22Z" />
+              <line class="cls-20" x1="64.11" y1="181.15" x2="64.11" y2="205.68" />
+              <rect class="cls-21" x="49.78" y="203.79" width="28.46" height="4.31" />
+              <path class="cls-10" d="M77.24,204.79v2.31H50.78v-2.31H77.24m2-2H48.78v6.31H79.24v-6.31Z" />
+              <line class="cls-7" x1="48.9" y1="179.17" x2="79.01" y2="179.17" />
+              <rect class="cls-11" x="53.96" y="220.39" width="20.46" height="26.56" />
+              <path class="cls-10" d="M73.42,221.39V246H55V221.39H73.42m2-2H53V248H75.42V219.39Z" />
+              <line class="cls-20" x1="64.11" y1="221.32" x2="64.11" y2="245.85" />
+              <rect class="cls-21" x="49.78" y="243.96" width="28.46" height="4.31" />
+              <path class="cls-10" d="M77.24,245v2.31H50.78V245H77.24m2-2H48.78v6.31H79.24V243Z" />
+              <line class="cls-7" x1="48.9" y1="219.34" x2="79.01" y2="219.34" />
+              <g class="cls-22">
+                <rect class="cls-10" x="26.15" y="266.22" width="76" height="8" />
+              </g>
+              <rect class="cls-23" x="20.83" y="256.97" width="86.36" height="8.92" />
+              <polygon class="cls-23" points="95.71 111.8 32.31 111.8 25.82 123.38 102.2 123.38 95.71 111.8" />
+              <rect class="cls-11" x="26.15" y="180.31" width="6.82" height="26.56" />
+              <path class="cls-10" d="M32,181.31v24.56H27.15V181.31H32m2-2H25.15v28.56H34V179.31Z" />
+              <rect class="cls-21" x="23.52" y="203.88" width="12.27" height="4.31" />
+              <path class="cls-10" d="M34.79,204.88v2.31H24.52v-2.31H34.79m2-2H22.52v6.31H36.79v-6.31Z" />
+              <line class="cls-7" x1="22.98" y1="179.26" x2="36.62" y2="179.26" />
+              <rect class="cls-11" x="26.34" y="141.58" width="6.82" height="26.56" />
+              <path class="cls-10" d="M32.16,142.58v24.56H27.34V142.58h4.82m2-2H25.34v28.56h8.82V140.58Z" />
+              <rect class="cls-21" x="23.71" y="165.15" width="12.27" height="4.31" />
+              <path class="cls-10" d="M35,166.15v2.31H24.71v-2.31H35m2-2H22.71v6.31H37v-6.31Z" />
+              <line class="cls-7" x1="23.17" y1="140.53" x2="36.8" y2="140.53" />
+              <rect class="cls-11" x="26.27" y="220.42" width="6.82" height="26.56" />
+              <path class="cls-10" d="M32.1,221.42V246H27.27V221.42H32.1m2-2H25.27V248H34.1V219.42Z" />
+              <rect class="cls-21" x="23.65" y="243.99" width="12.27" height="4.31" />
+              <path class="cls-10" d="M34.92,245v2.31H24.65V245H34.92m2-2H22.65v6.31H36.92V243Z" />
+              <line class="cls-7" x1="23.11" y1="219.37" x2="36.74" y2="219.37" />
+              <rect class="cls-11" x="94.65" y="180.31" width="6.82" height="26.56" />
+              <path class="cls-10" d="M100.47,181.31v24.56H95.65V181.31h4.82m2-2H93.65v28.56h8.82V179.31Z" />
+              <rect class="cls-21" x="92.02" y="203.88" width="12.27" height="4.31" />
+              <path class="cls-10" d="M103.29,204.88v2.31H93v-2.31h10.27m2-2H91v6.31h14.27v-6.31Z" />
+              <line class="cls-7" x1="91.48" y1="179.26" x2="105.12" y2="179.26" />
+              <rect class="cls-11" x="94.84" y="141.58" width="6.82" height="26.56" />
+              <path class="cls-10" d="M100.66,142.58v24.56H95.84V142.58h4.82m2-2H93.84v28.56h8.82V140.58Z" />
+              <rect class="cls-21" x="92.21" y="165.15" width="12.27" height="4.31" />
+              <path class="cls-10" d="M103.48,166.15v2.31H93.21v-2.31h10.27m2-2H91.21v6.31h14.27v-6.31Z" />
+              <line class="cls-7" x1="91.67" y1="140.53" x2="105.3" y2="140.53" />
+              <rect class="cls-11" x="94.77" y="220.42" width="6.82" height="26.56" />
+              <path class="cls-10" d="M100.6,221.42V246H95.77V221.42h4.82m2-2H93.77V248h8.82V219.42Z" />
+              <rect class="cls-21" x="92.15" y="243.99" width="12.27" height="4.31" />
+              <path class="cls-10" d="M103.42,245v2.31H93.15V245h10.27m2-2H91.15v6.31h14.27V243Z" />
+              <line class="cls-7" x1="91.61" y1="219.37" x2="105.24" y2="219.37" />
+              <rect class="cls-24" x="22.23" y="122.88" width="83.33" height="6.83" />
+              <path class="cls-23"
+                d="M78.24,99.72H49.79c-7.85,0-15,5.12-18.39,13.17H96.62C93.23,104.84,86.08,99.72,78.24,99.72Z" />
+              <path class="cls-11" d="M56.5,122.63v-8.94a7.53,7.53,0,1,1,15.06,0v8.94Z" />
+              <path class="cls-10"
+                d="M64,107.16a6.54,6.54,0,0,1,6.53,6.53v7.94H57.5v-7.94A6.54,6.54,0,0,1,64,107.16m0-2h0a8.53,8.53,0,0,0-8.53,8.53v9.94H72.55v-9.94A8.53,8.53,0,0,0,64,105.16Z" />
+              <line class="cls-20" x1="63.96" y1="106.37" x2="63.96" y2="121.75" />
+              <line class="cls-25" x1="64.21" y1="270.15" x2="64.21" y2="297.78" />
+              <line class="cls-14" x1="9.15" y1="164.93" x2="9.15" y2="175.97" />
+              <line class="cls-2" x1="16.69" y1="324.22" x2="16.69" y2="332.3" />
+              <path class="cls-2" d="M20.11,331.84" />
+              <path class="cls-2" d="M20.11,339.93" />
+              <path class="cls-2" d="M20.11,324.22" />
+              <path class="cls-2" d="M20.11,327.93" />
+              <line class="cls-1" x1="27.4" y1="315.68" x2="27.4" y2="344.88" />
+              <line class="cls-3" x1="16.38" y1="324.22" x2="16.38" y2="332.3" />
+              <line class="cls-3" x1="16.38" y1="337.22" x2="16.38" y2="340.93" />
+              <path class="cls-2" d="M20.11,331.84" />
+              <path class="cls-2" d="M20.11,327.93" />
+              <rect class="cls-8" x="49.61" y="306.34" width="30.17" height="6.12" rx="3.06" ry="3.06" />
+              <line class="cls-3" x1="16.38" y1="346.09" x2="16.38" y2="354.18" />
+              <line class="cls-3" x1="16.38" y1="362.72" x2="16.38" y2="366.43" />
+            </g>
+          </g>
+        </svg>
+      </div>
+
+      <div id="smokefrontplace"></div>
+      <div id="smokebackplace"></div>
+      <div id="windplace"></div>
+      <script type="text/javascript">
+        (function(d, m){
+            var kommunicateSettings = 
+                {"appId":"22d7698709d4630c8899af11b224bc1e",
+                "popupWidget":true,
+                "automaticChatOpenOnNavigation":true};
+            var s = document.createElement("script");
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://widget.kommunicate.io/v2/kommunicate.app";
+            var h = document.getElementsByTagName("head")[0]; 
+            h.appendChild(s);
+            window.kommunicate = m; 
+            m._globals = kommunicateSettings;
+        })(document, window.kommunicate || {});
+    </script>
+    <script src = "http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+    <script>
+      var map, newMarker, markerLocation,c=0;
+      var options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0
+      };
+      function success(pos) {
+        crd = pos.coords;
+        var mapOptions = {
+          center: [crd.latitude, crd.longitude],
+          zoom: 10
+       }
+       
+       // Creating a map object
+       //var map = new L.map('map', mapOptions);
+       //map.fitBounds(bounds, {padding: [50,50]})
+       // Creating a Layer object
+       map = L.map('map',options).setView([crd.latitude, crd.longitude], 18);
+       var layer = new L.TileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png');
+      
+       
+       map.addLayer(layer);
+       var marker = L.marker([crd.latitude, crd.longitude]);
+       marker.addTo(map);
+       
+
+      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+          maxZoom: 18
+      }).addTo(map);
+      
+      newMarkerGroup = new L.LayerGroup();
+      map.on('click', addMarker);
+      function getDistance(origin, destination) {
+    // return distance in meters
+        var lon1 = toRadian(origin[1]),
+        lat1 = toRadian(origin[0]),
+        lon2 = toRadian(destination[1]),
+        lat2 = toRadian(destination[0]);
+
+        var deltaLat = lat2 - lat1;
+        var deltaLon = lon2 - lon1;
+
+        var a = Math.pow(Math.sin(deltaLat/2), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(deltaLon/2), 2);
+        var c = 2 * Math.asin(Math.sqrt(a));
+        var EARTH_RADIUS = 6371;
+        return c * EARTH_RADIUS * 1000;
+    }
+      function toRadian(degree) {
+          return degree*Math.PI/180;
+      }
+      function addMarker(e){
+        if(c<1){
+          // Add marker to map at click location; add popup window
+          var newMarker = new L.marker(e.latlng).addTo(map);
+          console.log(e.latlng);
+          var distance = getDistance([crd.latitude, crd.longitude], [e.latlng.lat, e.latlng.lng])
+          var distkm=distance/1000;
+          console.log(distkm);
+          c++;
+          var price=distkm.toFixed(2)*15+10;
+          document.getElementById('dist').innerHTML = "Calculated distance: "+distkm.toFixed(2)+"Km(s)" ;
+          document.getElementById('pay').innerHTML= "Estimated price (Rs):"+price;
+
+        }
+      }
+      }
+    
+      function error(err) {
+        console.warn(`ERROR(${err.code}): ${err.message}`);
+      }
+      
+      navigator.geolocation.getCurrentPosition(success, error, options);
+       // Creating map options
+     
+    </script>
+    </div>
+ 
+  </body>
+  <script src='https://code.jquery.com/jquery-3.1.1.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.0/TweenMax.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/gsap/1.10.3/plugins/CSSPlugin.min.js'></script>
+  <script src='https://s3-us-west-2.amazonaws.com/s.cdpn.io/16327/kinetic-v5.1.0.min.js'></script>
+  <script>
+    var tl = new TimelineMax({}),
+  density = 30,
+  speed = 1,
+  rocket = document.getElementById("rocket");
+      fly();
+      clear();
+      seedsmoke();
+      seedsmokeback();
+      seedwind();
+      animflame();
+  
+function setdefaultplace()
+{  
+      TweenMax.set(rocket, {y:510, opacity:1})
+    }
+function thrill(){
+TweenMax.to(rocket, 0.05, {
+  y:'+=4',
+  x:'+=4',
+  repeat:-1,
+  yoyo:true
+})}
+function fly(){
+setdefaultplace(),
+thrill(),
+TweenMax.to(rocket, 1, {y:0});
+}
+function seedsmoke() {
+var i, size = (8+ Math.random()),  time = (1* Math.random()), delay = (0.1 + Math.random()), size3=(0);
+for (i = 0; i < 25; i++)
+{  $("<div/>", {id:"smokefront"+i}).addClass("smokefront").appendTo("#smokefrontplace");
+if (i<14) {size3=(i+1 + Math.random())} else {size3=(25-i + Math.random())}
+TweenMax.to(("#smokefront"+i),(size3+2)/16,{scaleX:size3, scaleY:size3, opacity:0,  repeat:-1, repeatDelay:0.1, ease:Linear.easeNone} )
+
+}; }
+function seedsmokeback() {
+var i, size = (8+ Math.random()),  time = (1* Math.random()), delay = (0.1 + Math.random()), size3=(0);
+for (i = 0; i < 10; i++)
+{  $("<div/>", {id:"smokeback"+i}).addClass("smokeback").appendTo("#smokebackplace");
+if (i<5) {size3=(i+2 + Math.random())*2} else {size3=(10-i + Math.random())*2}
+TweenMax.set ((".smokeback"), {opacity:0.4})
+TweenMax.to(("#smokeback"+i),(size3+2)/2,{scaleX:size3, scaleY:size3, opacity:0,  repeat:-1, repeatDelay:0.1, ease:Linear.easeNone} )
+
+}; }
+function seedwind(){
+var i;
+for (i = 0; i < 8; i++)
+{  $("<div/>", {id:"wind"+i,style:"margin-left=20px"}).addClass("wind").appendTo("#windplace");
+  TweenMax.from(("#wind"+i),0.5,{y:-500-((5+Math.random())*2),  scaleY:10-(Math.random()*120), opacity:.4,  repeat:-1, repeatDelay:(0.1+Math.random())/2, ease:Linear.easeNone} )
+};
+
+}
+function clear (){
+$( ".smokefront,.smokeback,.wind").remove();
+}
+
+function animflame(){
+TweenMax.to((".cls-3"),0.2,{y:80,opacity:1, repeat:-1, repeatDelay:0.1, ease:Linear.easeNone})
+TweenMax.to((".cls-1"),0.2,{fill:"rgb(248,143,7)",opacity:1, repeat:-1, repeatDelay:0.1, ease:Power3.easeOut,yoyo:true})
+}
+  </script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+</body>
+
+</html>
